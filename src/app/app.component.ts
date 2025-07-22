@@ -11,13 +11,6 @@ export class AppComponent implements OnInit {
   constructor(private olympicService: OlympicService) { }
 
   ngOnInit(): void {
-    this.olympicService.loadInitialData().pipe(take(1)).subscribe(
-      {
-        next: (data) => { console.log(data) },
-        error: (error) => {
-          throw Error("Impossible de récupérer les données");
-        }
-      }
-    );
+    this.olympicService.loadInitialData().pipe(take(1)).subscribe();
   }
 }
