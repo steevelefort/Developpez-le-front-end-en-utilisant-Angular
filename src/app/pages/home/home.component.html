@@ -1,11 +1,29 @@
-<h2>Olympic games app</h2>
-<hr />
-<p>{{ (olympics$ | async)?.length }} data loaded</p>
-<p>{{ numberOfJOs$ | async}} data loaded</p>
+<main>
+  <h1>Medals per Country</h1>
 
-<ngx-charts-pie-chart
-  [view]="(viewPort$ | async) || [1,1]"
-  [results]="pieChartData$ | async"
-  [labels]="config.labels"
-  />
-<!-- [view]="config.view" -->
+  <div class="tag-box">
+    <div class="tag">
+      Number of JOs
+      <div class="value">
+        {{ (olympics$ | async)?.length }}
+      </div>
+    </div>
+    <div class="tag">
+      Number of countries
+      <div class="value">
+        {{ numberOfJOs$ | async}}
+      </div>
+    </div>
+  </div>
+
+  <ngx-charts-pie-chart
+    [view]="(viewPort$ | async) || [1,1]"
+    [results]="pieChartData$ | async"
+    [labels]="config.labels"
+    [scheme]="config.scheme"
+    [tooltipText]="formatTooltip"
+    (select)="onClickCountry($event)"
+    />
+
+  <!-- [view]="config.view" -->
+</main>
