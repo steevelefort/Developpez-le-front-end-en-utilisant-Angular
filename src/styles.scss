@@ -1,1 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
 /* You can add global styles to this file, and also import other style files */
+$accent: #04838f;
+$title-fg: #fff;
+
+:root {
+  --accent-color: #{$accent};
+}
+
+* {
+  box-sizing: border-box;
+  font-family: Lato, sans-serif;
+  font-weight: 400;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+main {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h1 {
+  background-color: $accent;
+  color: $title-fg;
+  border-radius: 7px;
+  display: inline-block;
+  padding: 5px 15px;
+  margin: 20px 0;
+}
+
+.pie-label {
+  @media (orientation: portrait) {
+    font-size: 1.0em !important;
+  }
+
+  @media (orientation: landscape) {
+    font-size: 1.2em !important;
+  }
+}
+
+.ngx-charts-tooltip-content {
+  background-color: $accent !important;
+  padding: 5px 15px !important;
+  font-size: 1.4em !important;
+  line-height: 1.4em !important;
+
+  .tooltip-text {}
+
+  img {
+    width: 12px !important;
+    position: relative;
+    top:3px;
+  }
+
+  .tooltip-caret {
+    border-top-color: $accent !important;
+  }
+}
