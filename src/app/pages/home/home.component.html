@@ -1,3 +1,11 @@
 <h2>Olympic games app</h2>
 <hr />
 <p>{{ (olympics$ | async)?.length }} data loaded</p>
+<p>{{ numberOfJOs$ | async}} data loaded</p>
+
+<ngx-charts-pie-chart
+  [view]="(viewPort$ | async) || [1,1]"
+  [results]="pieChartData$ | async"
+  [labels]="config.labels"
+  />
+<!-- [view]="config.view" -->
