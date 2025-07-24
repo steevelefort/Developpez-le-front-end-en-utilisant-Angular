@@ -1,0 +1,51 @@
+<main *ngIf="olympic$ | async as olympic; else notFound">
+  <header>
+    <button (click)="onGoBack()">
+      <img src="/assets/images/retour.svg" alt="Retour à la page précédente">
+      Retour
+    </button>
+    <div>
+      <h1>{{olympic.country}}</h1>
+    </div>
+  </header>
+
+  <div class="tag-box">
+    <app-tag
+      label="Number of entries"
+      [value]="olympic.participations.length"
+      />
+    <app-tag
+      label="Total number medals"
+      [value]="countMedals(olympic.participations)"
+      />
+      <!-- [value]="olympic.participations.reduce((total: number,item)=>total+item.medalsCount,0)" -->
+    <app-tag
+      label="Total number of athletes"
+      [value]="countAthletes(olympic.participations)"
+      />
+  </div>
+
+  <ngx-charts-line-chart
+    [view]="(viewPort$ | async) || [0,0]"
+    [scheme]="config.colorScheme"
+    [showXAxisLabel]="config.showXAxisLabel"
+    [showYAxisLabel]="config.showYAxisLabel"
+    [xAxis]="config.xAxis"
+    [yAxis]="config.yAxis"
+    [xAxisLabel]="config.xAxisLabel"
+    [yAxisLabel]="config.yAxisLabel"
+    [autoScale]="config.autoScale"
+    [animations]="config.animations"
+    [results]="data$ | async"
+    />
+
+  <!-- (select)="onSelect($event)" -->
+  <!-- (activate)="onActivate($event)" -->
+  <!-- (deactivate)="onDeactivate($event)" -->
+
+</main>
+<ng-template #notFound>
+  <app-not-found />
+</ng-template>
+
+

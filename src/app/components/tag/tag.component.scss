@@ -1,0 +1,12 @@
+.tag {
+  border: var(--accent-color) solid 2px;
+  border-radius: 7px;
+  padding: 10px 20px;
+  margin: 5px 20px;
+  font-weight: 300;
+  font-size: 1.2em;
+
+  .value {
+    font-weight: 700;
+  }
+}

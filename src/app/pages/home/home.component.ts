@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { map, count, Observable, of, fromEvent, startWith, shareReplay } from 'rxjs';
 import { Olympic } from 'src/app/core/models/Olympic';
 import { PieChartData } from 'src/app/core/models/PieChartData';
 import { OlympicService } from 'src/app/core/services/olympic.service';
+import { ViewportService } from 'src/app/core/services/viewport.service';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +14,7 @@ import { OlympicService } from 'src/app/core/services/olympic.service';
 })
 export class HomeComponent implements OnInit {
   public olympics$: Observable<Olympic[] | null> = of(null);
+  public viewPort$: Observable<[number, number]> = of([0,0])
 
   config = {
     labels: true,
@@ -40,18 +43,9 @@ export class HomeComponent implements OnInit {
     return jos.size;
   }
 
-  private getViewSize = (): [number, number] => {
-    if (window.innerWidth > window.innerHeight) {
-      return [window.innerWidth, window.innerHeight * 0.75] as [number, number]
-    }
-    return [window.innerWidth, window.innerWidth * 0.80] as [number, number]
-  }
-
-
   public pieChartData$!: Observable<PieChartData[]>;
   public countryCount$!: Observable<number>;
   public numberOfJOs$!: Observable<number>;
-  public viewPort$!: Observable<[number, number]>;
 
   public formatTooltip({ data: { name, value } }: { data: { name: string; value: number }; }): string {
     return `
@@ -64,24 +58,21 @@ export class HomeComponent implements OnInit {
     `;
   }
 
-
-  constructor(private olympicService: OlympicService) { }
+  constructor(
+    private olympicService: OlympicService,
+    private router: Router,
+    private viewPortService: ViewportService
+  ) { }
 
   ngOnInit(): void {
     this.olympics$ = this.olympicService.getOlympics();
     this.pieChartData$ = this.olympics$.pipe(map(this.olympicsToPieChartData));
     this.numberOfJOs$ = this.olympics$.pipe(map(this.getNumberOfJOs))
-    this.viewPort$ = fromEvent(window, 'resize').pipe(
-      startWith(this.getViewSize()),
-      map(this.getViewSize)
-    )
+    this.viewPort$ = this.viewPortService.getViewportSize();
   }
-
 
   onClickCountry(data: any) {
-    console.log(`Navigation vers country ${data.extra.id}`)
+    this.router.navigateByUrl(`detail/${data.extra.id}`);
   }
-
-
 
 }
