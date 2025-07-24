@@ -54,8 +54,6 @@ h1 {
   font-size: 1.4em !important;
   line-height: 1.4em !important;
 
-  .tooltip-text {}
-
   img {
     width: 12px !important;
     position: relative;
@@ -66,3 +64,11 @@ h1 {
     border-top-color: $accent !important;
   }
 }
+
+.tag-box {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  flex-wrap:wrap;
+}
+

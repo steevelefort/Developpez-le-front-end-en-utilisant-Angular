@@ -1,0 +1,25 @@
+header {
+  display: flex;
+  width: 100%;
+  align-items: center;
+
+  div {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  button {
+    background-color: transparent;
+    border: none;
+    display: flex;
+    font-size: 1.2em;
+    align-items: center;
+    cursor: pointer;
+
+    img {
+      height: 16px;
+      margin-right: 5px;
+    }
+  }
+}

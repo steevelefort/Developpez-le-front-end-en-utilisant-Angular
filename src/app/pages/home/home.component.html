@@ -2,18 +2,14 @@
   <h1>Medals per Country</h1>
 
   <div class="tag-box">
-    <div class="tag">
-      Number of JOs
-      <div class="value">
-        {{ (olympics$ | async)?.length }}
-      </div>
-    </div>
-    <div class="tag">
-      Number of countries
-      <div class="value">
-        {{ numberOfJOs$ | async}}
-      </div>
-    </div>
+    <app-tag
+      label="number Of JOs"
+      [value]="numberOfJOs$ | async"
+      />
+    <app-tag
+      label="Number of countries"
+      [value]="(olympics$ | async)?.length"
+      />
   </div>
 
   <ngx-charts-pie-chart
