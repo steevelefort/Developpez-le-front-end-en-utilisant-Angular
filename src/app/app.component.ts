@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   constructor(private olympicService: OlympicService) { }
 
   ngOnInit(): void {
-    // TODO: Unsubscribe !!!
+    // Initial Ajax call to populate data in the service. Take(1) ensure automatic unsubscribe.
     this.olympicService.loadInitialData().pipe(take(1)).subscribe();
   }
 }

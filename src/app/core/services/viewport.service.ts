@@ -15,14 +15,24 @@ export class ViewportService {
     )
   }
 
+  /**
+   * Computes responsive chart dimensions from the current window size.
+   *
+   * @returns {[number, number]} A tuple of width and height in pixels.
+   */
   private getViewSize = (): [number, number] => {
     if (window.innerWidth > window.innerHeight) {
-      return [window.innerWidth, window.innerHeight * 0.75] as [number, number]
+      return [window.innerWidth, window.innerHeight * 0.75]
     }
-    return [window.innerWidth, window.innerWidth * 0.80] as [number, number]
+    return [window.innerWidth, window.innerWidth * 0.80]
   }
 
-  public getViewportSize() {
+  /**
+   * Exposes an observable that emits responsive chart dimensions.
+   *
+   * @returns {Observable<[number, number]>} An observable emitting responsive width and height in pixels.
+   */
+  public getViewportSize(): Observable<[number, number]> {
     return this.viewPort$;
   }
 }
