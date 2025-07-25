@@ -71,8 +71,8 @@ export class HomeComponent implements OnInit {
     this.viewPort$ = this.viewPortService.getViewportSize();
   }
 
-  onClickCountry(data: any) {
-    this.router.navigateByUrl(`detail/${data.extra.id}`);
+  onClickCountry(data: PieChartData) {
+    this.router.navigateByUrl(`detail/${data.extra?.id}`);
   }
 
 }
