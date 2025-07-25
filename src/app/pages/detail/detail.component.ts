@@ -17,12 +17,8 @@ export class DetailComponent implements OnInit {
 
   public olympic$: Observable<Olympic | null> = of(null);
   public data$: Observable<[LineChartData] | []> = of([])
-  public notFound = false;
   public viewPort$: Observable<[number, number]> = of([0,0])
 
-  view: [number, number] = [700, 300];
-
-  // options
   config = {
     legend: false,
     colorScheme: "cool",
@@ -48,6 +44,17 @@ export class DetailComponent implements OnInit {
     private router: Router
   ) { }
 
+  ngOnInit(): void {
+    const currentId = Number(this.route.snapshot.params['id']);
+    this.olympic$ = this.olympicService.getOlympicById(currentId);
+
+    this.data$ = this.olympic$.pipe(
+      map(this.mapLineChartData)
+    )
+
+    this.viewPort$ = this.viewPortService.getViewportSize();
+  }
+
   mapLineChartData = (olympic: Olympic | null): [LineChartData] | [] => {
     if (!olympic) return [];
     return [
@@ -68,18 +75,7 @@ export class DetailComponent implements OnInit {
     return participations.reduce((total:number, participation: Participation)=>total+=participation.athleteCount,0);
   }
 
-  ngOnInit(): void {
-    const currentId = Number(this.route.snapshot.params['id']);
-    this.olympic$ = this.olympicService.getOlympicById(currentId);
-
-    this.data$ = this.olympic$.pipe(
-      map(this.mapLineChartData)
-    )
-
-    this.viewPort$ = this.viewPortService.getViewportSize();
-  }
-
-  onGoBack() {
+  onGoBack(): void {
     this.router.navigateByUrl("");
   }
 }

@@ -1,4 +1,4 @@
-<main>
+<main *ngIf="pieChartData$ | async as pieChartData;else notFound">
   <h1>Medals per Country</h1>
 
   <div class="tag-box">
@@ -8,18 +8,24 @@
       />
     <app-tag
       label="Number of countries"
-      [value]="(olympics$ | async)?.length"
+      [value]="numberOfCountries$ | async"
       />
   </div>
 
   <ngx-charts-pie-chart
     [view]="(viewPort$ | async) || [1,1]"
-    [results]="pieChartData$ | async"
+    [results]="pieChartData"
     [labels]="config.labels"
     [scheme]="config.scheme"
     [tooltipText]="formatTooltip"
     (select)="onClickCountry($event)"
     />
-
-  <!-- [view]="config.view" -->
 </main>
+
+<ng-template #notFound>
+  <main>
+    <h1>Une erreur est survenue</h1>
+    <p>Veuillez essayer à nouveau dans un instant.</p>
+    <button>Rafraichir</button>
+  </main>
+</ng-template>

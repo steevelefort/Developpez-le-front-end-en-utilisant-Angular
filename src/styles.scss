@@ -27,6 +27,7 @@ main {
   align-items: center;
   flex-direction: column;
   justify-content: center;
+
 }
 
 h1 {
@@ -57,11 +58,17 @@ h1 {
   img {
     width: 12px !important;
     position: relative;
-    top:3px;
+    top: 3px;
   }
 
-  .tooltip-caret {
+  .position-top.tooltip-caret {
     border-top-color: $accent !important;
+  }
+  .position-right.tooltip-caret {
+    border-right-color: $accent !important;
+  }
+  .position-left.tooltip-caret {
+    border-left-color: $accent !important;
   }
 }
 
@@ -69,6 +76,11 @@ h1 {
   display: flex;
   justify-content: space-around;
   text-align: center;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
 }
 
+.hidden-portrait {
+  @media (orientation: portrait) {
+    display: none;
+  }
+}
