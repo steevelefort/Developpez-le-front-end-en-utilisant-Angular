@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
   public numberOfCountries$!: Observable<number>;
   public numberOfJOs$!: Observable<number>;
 
+  // ngx-charts configuration
   config = {
     labels: true,
     scheme: "cool",
@@ -31,6 +32,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // The differents observers to use in html with async pipes (auto-unsubscribed)
     this.olympics$ = this.olympicService.getOlympics();
     this.pieChartData$ = this.olympics$.pipe(map(this.olympicsToPieChartData));
     this.numberOfJOs$ = this.olympics$.pipe(map(this.getNumberOfJOs));
@@ -38,10 +40,20 @@ export class HomeComponent implements OnInit {
     this.viewPort$ = this.viewPortService.getViewportSize();
   }
 
+  /**
+   * Navigate back to home page
+   */
   onClickCountry(data: PieChartData): void {
     this.router.navigateByUrl(`detail/${data.extra?.id}`);
   }
 
+  /**
+   * Convert Olympic[] data to PieChartData[]
+   * This function is meant to be used in an observer map pipe.
+   *
+   * @param {Olympic[]|null} olympics - Olympics data to convert
+   * @returns {PieChartData[]|null} - Converted data to use with the PieChart component
+   */
   private olympicsToPieChartData = (olympics: Olympic[] | null): PieChartData[] | null => olympics !== null ? olympics.map(
     (item: Olympic): PieChartData => (
       {
@@ -52,6 +64,13 @@ export class HomeComponent implements OnInit {
     )
   ) : null;
 
+  /**
+   * Count the number of JOs from an Olympic[]
+   * This function is meant to be used in an observer map pipe.
+   *
+   * @param {Olympic[]|null} olympics - Olympics data
+   * @returns {number} The number of JOs found
+   */
   private getNumberOfJOs = (olympics: Olympic[] | null): number => {
     if (!olympics) return 0;
     const jos = new Set();
@@ -63,8 +82,22 @@ export class HomeComponent implements OnInit {
     return jos.size;
   }
 
+  /**
+   * Count the number of countries from an Olympic[]
+   * This function is meant to be used in an observer map pipe.
+   *
+   * @param {Olympic[]|null} olympics - Olympics data
+   * @returns {number} The number of countries found
+   */
   private getNumberOfCountries = (olympics: Olympic[] | null): number => olympics ? olympics.length : 0;
 
+  /**
+   * Format a ngx-charts tooltip to be displayed in a ngx-chart
+   * This function have to be linked to the tooltipText attribute of a ngx-chart.
+   *
+   * @param {{name, value}} data - the title (name), and the value to be printed in the tooltip.
+   * @returns {string} The tooltip content to be displayed
+   */
   public formatTooltip({ data: { name, value } }: { data: { name: string; value: number }; }): string {
     return `
     <div class="tooltip">

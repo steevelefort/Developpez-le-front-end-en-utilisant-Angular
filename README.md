@@ -1,29 +1,67 @@
-# OlympicGamesStarter
+# Olympic Games Dashboard for Télésport
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.3.
+## 📋 Description
+Interactive dashboard application for visualizing Olympic Games statistics. Built with Angular for Télésport to display medal counts, country participation data, and historical performance trends through interactive charts.
 
-Don't forget to install your node_modules before starting (`npm install`).
+**Features:**
+- 📊 Interactive pie chart showing medals per country
+- 📈 Line chart displaying medal evolution over time (by country)
+- 📱 Responsive design
 
-## Development server
+## 🛠️ Stack
+- **Framework:** Angular 20.1.2
+- **Charts:** ngx-charts (swimlane)
+- **Styling:** SCSS with responsive design
+- **Data:** Local JSON mock data
+## 📋 Prerequisites
+- Node.js (version 18 or higher)
+- npm (comes with Node.js)
+- Angular CLI: `npm install -g @angular/cli`
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Run this app locally with the development server 
+
+- Clone this repository : `git clone https://github.com/steevelefort/Developpez-le-front-end-en-utilisant-Angular.git`.
+- Install your node_modules before starting with `npm install` inside the folder.
+- Run `npm start` at the root of the created folder.
+- Run `ng serve` to launch a dev server. 
+- Navigate to `http://localhost:4200/`.
+
+The application will automatically reload if you change any of the source files.
 
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Where to start
+## Project structure
 
-As you can see, an architecture has already been defined for the project. It is just a suggestion, you can choose to use your own. The predefined architecture includes (in addition to the default angular architecture) the following:
-
-- `components` folder: contains every reusable components
-- `pages` folder: contains components used for routing
-- `core` folder: contains the business logic (`services` and `models` folders)
-
-I suggest you to start by understanding this starter code. Pay an extra attention to the `app-routing.module.ts` and the `olympic.service.ts`.
-
-Once mastered, you should continue by creating the typescript interfaces inside the `models` folder. As you can see I already created two files corresponding to the data included inside the `olympic.json`. With your interfaces, improve the code by replacing every `any` by the corresponding interface.
-
-You're now ready to implement the requested features.
-
-Good luck!
+```text
+├── README.md
+├── src
+│   ├── app
+│   │   ├── app.component: Starting component
+│   │   ├── components
+│   │   │   └── tag: A little badge component to show a label with value
+│   │   ├── core
+│   │   │   ├── models
+│   │   │   │   ├── LineChartData.ts: Type interface for ngx-line-charts
+│   │   │   │   ├── Olympic.ts: Type interface to map JSON data
+│   │   │   │   ├── Participation.ts: Type interface to map JSON data
+│   │   │   │   └── PieChartData.ts: Type interface for ngx-pie-chart
+│   │   │   └── services
+│   │   │       ├── olympic.service.ts: Providing data (Olympics)
+│   │   │       └── viewport.service.ts: Providing responsive capability
+│   │   └── pages
+│   │       ├── detail: show the details for one country
+│   │       ├── home: main page with all countries
+│   │       └── not-found: error page for 404 http errors
+│   ├── assets
+│   │   ├── images
+│   │   │   ├── medal.svg: a medal icon (free)
+│   │   │   └── retour.svg: a right arrow icon (free)
+│   │   └── mock
+│   │       └── olympic.json: given data
+│   ├── favicon.ico
+│   ├── index.html: starting html page
+│   ├── main.ts: Typescript bootstrap
+│   ├── styles.scss: main CSS style
+```

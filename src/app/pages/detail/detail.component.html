@@ -17,10 +17,9 @@
       [value]="olympic.participations.length"
       />
     <app-tag
-      label="Total number medals"
+      label="Total number of medals"
       [value]="countMedals(olympic.participations)"
       />
-      <!-- [value]="olympic.participations.reduce((total: number,item)=>total+item.medalsCount,0)" -->
     <app-tag
       label="Total number of athletes"
       [value]="countAthletes(olympic.participations)"
@@ -40,10 +39,6 @@
     [animations]="config.animations"
     [results]="data$ | async"
     />
-
-  <!-- (select)="onSelect($event)" -->
-  <!-- (activate)="onActivate($event)" -->
-  <!-- (deactivate)="onDeactivate($event)" -->
 
 </main>
 <ng-template #notFound>

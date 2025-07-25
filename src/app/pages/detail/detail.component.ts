@@ -16,9 +16,10 @@ import { ViewportService } from 'src/app/core/services/viewport.service';
 export class DetailComponent implements OnInit {
 
   public olympic$: Observable<Olympic | null> = of(null);
-  public data$: Observable<[LineChartData] | []> = of([])
+  public data$: Observable<LineChartData[]> = of([])
   public viewPort$: Observable<[number, number]> = of([0,0])
 
+  // ngx-charts configuration
   config = {
     legend: false,
     colorScheme: "cool",
@@ -45,17 +46,22 @@ export class DetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const currentId = Number(this.route.snapshot.params['id']);
-    this.olympic$ = this.olympicService.getOlympicById(currentId);
+    const countryId = Number(this.route.snapshot.params['id']);
 
-    this.data$ = this.olympic$.pipe(
-      map(this.mapLineChartData)
-    )
-
+    // The differents observers to use in html with async pipes (auto-unsubscribed)
+    this.olympic$ = this.olympicService.getOlympicById(countryId);
+    this.data$ = this.olympic$.pipe( map(this.mapLineChartData))
     this.viewPort$ = this.viewPortService.getViewportSize();
   }
 
-  mapLineChartData = (olympic: Olympic | null): [LineChartData] | [] => {
+  /**
+   * Convert Olympic[] for a ngx-line-chart
+   * This function is meant to be used in an observer map pipe.
+   *
+   * @param {Olympic|null} olympic - Olympics data to convert
+   * @returns {LineChartData[]} - Converted data to use with the LineChart component
+   */
+  mapLineChartData = (olympic: Olympic | null): LineChartData[] => {
     if (!olympic) return [];
     return [
       {
@@ -67,14 +73,31 @@ export class DetailComponent implements OnInit {
     ]
   }
 
+  /**
+   * Count the number of medals from a Participation[]
+   * This function is meant to be used in an observer map pipe.
+   *
+   * @param {Participation[]} participations - Participation data
+   * @returns {number} The number of medals
+   */
   countMedals(participations: Participation[]): number {
-    return participations.reduce((total:number, participation: Participation)=>total+=participation.medalsCount,0);
+    return participations.reduce((total:number, participation: Participation)=>total+participation.medalsCount,0);
   }
 
+  /**
+   * Count the number of athletes from a Participation[]
+   * This function is meant to be used in an observer map pipe.
+   *
+   * @param {Participation[]} participations - Participation data
+   * @returns {number} The number of athletes
+   */
   countAthletes(participations: Participation[]): number {
-    return participations.reduce((total:number, participation: Participation)=>total+=participation.athleteCount,0);
+    return participations.reduce((total:number, participation: Participation)=>total+participation.athleteCount,0);
   }
 
+  /**
+   * Navigate back to the home page
+   */
   onGoBack(): void {
     this.router.navigateByUrl("");
   }
