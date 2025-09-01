@@ -22,9 +22,9 @@ export class ViewportService {
    */
   private getViewSize = (): [number, number] => {
     if (window.innerWidth > window.innerHeight) {
-      return [window.innerWidth, window.innerHeight * 0.75]
+      return [window.innerWidth, window.innerHeight * 0.70]
     }
-    return [window.innerWidth, window.innerWidth * 0.80]
+    return [window.innerWidth, window.innerWidth * 0.75]
   }
 
   /**
