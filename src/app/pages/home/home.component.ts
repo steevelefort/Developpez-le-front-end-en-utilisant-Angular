@@ -6,6 +6,10 @@ import { PieChartData } from 'src/app/core/models/PieChartData';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import { ViewportService } from 'src/app/core/services/viewport.service';
 
+/**
+ * Home page component
+ * Shows Olympic data in pie chart format with statistics
+ */
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',

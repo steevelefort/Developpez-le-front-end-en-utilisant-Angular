@@ -1,5 +1,9 @@
 import { Component, Input } from '@angular/core';
 
+/**
+ * Tag component to display label and value pairs
+ * Shows statistics in a styled format
+ */
 @Component({
   selector: 'app-tag',
   templateUrl: './tag.component.html',
