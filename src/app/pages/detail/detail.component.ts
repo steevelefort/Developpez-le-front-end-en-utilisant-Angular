@@ -7,6 +7,10 @@ import { Participation } from 'src/app/core/models/Participation';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import { ViewportService } from 'src/app/core/services/viewport.service';
 
+/**
+ * Detail page component for a specific country
+ * Shows country Olympic data in line chart format with statistics
+ */
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',

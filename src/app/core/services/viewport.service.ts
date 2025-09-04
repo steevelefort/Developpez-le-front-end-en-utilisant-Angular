@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { fromEvent, map, Observable, startWith } from 'rxjs';
 
+/**
+ * Service to manage viewport size for responsive charts
+ * Provides window size dimensions for chart components
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -22,7 +26,7 @@ export class ViewportService {
    */
   private getViewSize = (): [number, number] => {
     if (window.innerWidth > window.innerHeight) {
-      return [window.innerWidth, window.innerHeight * 0.70]
+      return [window.innerWidth, window.innerHeight * 0.50]
     }
     return [window.innerWidth, window.innerWidth * 0.75]
   }
