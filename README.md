@@ -1,7 +1,7 @@
 # Olympic Games Dashboard for Télésport
 
 ## 📋 Description
-Interactive dashboard application for visualizing Olympic Games statistics. Built with Angular for Télésport to display medal counts, country participation data, and historical performance trends through interactive charts.
+Interactive dashboard application for visualizing Olympic Games statistics. Built with Angular for Télésport to display medal counts, country participation data, and historical performance through interactive charts.
 
 **Features:**
 - 📊 Interactive pie chart showing medals per country
@@ -14,16 +14,15 @@ Interactive dashboard application for visualizing Olympic Games statistics. Buil
 - **Styling:** SCSS with responsive design
 - **Data:** Local JSON mock data
 ## 📋 Prerequisites
-- Node.js (version 18 or higher)
+- Node.js (version 20 or higher)
 - npm (comes with Node.js)
 - Angular CLI: `npm install -g @angular/cli`
 
 ## Run this app locally with the development server 
 
 - Clone this repository : `git clone https://github.com/steevelefort/Developpez-le-front-end-en-utilisant-Angular.git`.
-- Install your node_modules before starting with `npm install` inside the folder.
+- Install node_modules before starting with `npm install` inside the folder.
 - Run `npm start` at the root of the created folder.
-- Run `ng serve` to launch a dev server. 
 - Navigate to `http://localhost:4200/`.
 
 The application will automatically reload if you change any of the source files.
