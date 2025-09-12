@@ -4,7 +4,6 @@ import { map, Observable, of } from 'rxjs';
 import { OlympicsDataMapper } from 'src/app/core/mappers/olympics-data.mapper';
 import { LineChartData } from 'src/app/core/models/LineChartData';
 import { Olympic } from 'src/app/core/models/Olympic';
-import { Participation } from 'src/app/core/models/Participation';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import { ViewportService } from 'src/app/core/services/viewport.service';
 
